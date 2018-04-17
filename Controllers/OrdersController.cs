@@ -41,34 +41,25 @@ namespace BuckIBooze.API.Controllers
         }
         
         [HttpPost]
-        public IActionResult Post([FromBody]Order order)
+        public String Post([FromBody]Order order)
         {
-            Console.WriteLine("Entered Post()");
-            Console.WriteLine("Order for: "+order.fname);
-            
-            if(order == null)
-            {
-                Console.WriteLine("Order is null");                
-                return BadRequest();
-            }
-
             //calculate total for order
             Product product = db.Products.Find(order.productID);
             var price = product.price;
             var total = order.quantity * price;
-            Console.WriteLine("Calculated total of: "+total);
             order.total = total;
 
             //generate a pickup number
             Random rnd = new Random();
             int pickupNumber = rnd.Next(100, 1000);
-            Console.WriteLine("Generated pickup number: "+pickupNumber);
             order.pickupNum = pickupNumber;
 
             this.db.Orders.Add(order);
             this.db.SaveChanges();
 
-            return CreatedAtRoute("GetOrder", new {id = order.id}, order);
+            String returnData = order.total.ToString() + ", " + order.pickupNum.ToString();
+
+            return returnData;
         }
         
         [HttpPut("{id}")]
