@@ -52,6 +52,19 @@ namespace BuckIBooze.API.Controllers
                 return BadRequest();
             }
 
+            //calculate total for order
+            Product product = db.Products.Find(order.productID);
+            var price = product.price;
+            var total = order.quantity * price;
+            Console.WriteLine("Calculated total of: "+total);
+            order.total = total;
+
+            //generate a pickup number
+            Random rnd = new Random();
+            int pickupNumber = rnd.Next(100, 1000);
+            Console.WriteLine("Generated pickup number: "+pickupNumber);
+            order.pickupNum = pickupNumber;
+
             this.db.Orders.Add(order);
             this.db.SaveChanges();
 
