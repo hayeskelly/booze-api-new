@@ -27,17 +27,25 @@ namespace BuckIBooze.API.Controllers
            return Ok(db.Orders);
         }
 
-        [HttpGet("{id}", Name="GetOrder")]
-        public IActionResult GetById(int id)
+        //[HttpGet("{id}", Name="GetOrder")]
+        //public IActionResult GetById(int id)
+        //{
+         //   var order = db.Orders.Find(id);
+
+         //   if(order == null)
+        //    {
+         //       return NotFound();
+         //   }
+
+        //    return Ok(order);
+        //}
+
+        [HttpGet("{id}", Name="GetOrderInfo")]
+        public String GetOrderInfo(int id)
         {
             var order = db.Orders.Find(id);
-
-            if(order == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(order);
+            String orderInfo = order.total.ToString() + ", " + order.pickupNum.ToString();
+            return orderInfo;
         }
         
         [HttpPost]
