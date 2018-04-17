@@ -12598,11 +12598,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mac/Documents/SP 18/ACCTMIS 3610/Labs/booze-api/BuckIBooze.API.csproj",
+      "projectUniqueName": "/Users/mac/Documents/SP 18/ACCTMIS 3610/Labs/Buck-I-Booze.API/BuckIBooze.API.csproj",
       "projectName": "BuckIBooze.API",
-      "projectPath": "/Users/mac/Documents/SP 18/ACCTMIS 3610/Labs/booze-api/BuckIBooze.API.csproj",
+      "projectPath": "/Users/mac/Documents/SP 18/ACCTMIS 3610/Labs/Buck-I-Booze.API/BuckIBooze.API.csproj",
       "packagesPath": "/Users/mac/.nuget/packages/",
-      "outputPath": "/Users/mac/Documents/SP 18/ACCTMIS 3610/Labs/booze-api/obj/",
+      "outputPath": "/Users/mac/Documents/SP 18/ACCTMIS 3610/Labs/Buck-I-Booze.API/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
