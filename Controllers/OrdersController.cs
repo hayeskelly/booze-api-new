@@ -27,32 +27,42 @@ namespace BuckIBooze.API.Controllers
            return Ok(db.Orders);
         }
 
-        //[HttpGet("{id}", Name="GetOrder")]
-        //public IActionResult GetById(int id)
-        //{
-         //   var order = db.Orders.Find(id);
-
-         //   if(order == null)
-        //    {
-         //       return NotFound();
-         //   }
-
-        //    return Ok(order);
-        //}
-
-        [HttpGet("{id}", Name="GetOrderInfo")]
-        public String GetOrderInfo(int id)
+        
+        [Route("api/orders/info/{id}/{name}")]
+        [HttpGet("{id}/{name}", Name="GetInfo")]
+        public String GetInfo(int id, string name)
         {
+            Console.WriteLine("Entered GetInfo()");
+            Console.WriteLine("Args passed: "+id+", "+name);
             var order = db.Orders.Find(id);
+            Console.WriteLine("GOT AN ORDER: "+order.fname);
             String orderInfo = order.total.ToString() + ", " + order.pickupNum.ToString();
+            Console.WriteLine("Returning order string of "+orderInfo);
             return orderInfo;
         }
+
+        [Route("api/orders/{id}")]
+        [HttpGet("{id}", Name="GetById")]
+         public IActionResult GetById(int id)
+         {
+             Console.WriteLine("Entered GetById()");
+             
+             var order = db.Orders.Find(id);
+ 
+             if(order == null)
+             {
+                 return NotFound();
+             }
+ 
+             return Ok(order);
+         }
         
         [HttpPost]
          public IActionResult Post([FromBody]Order order)
          {
              Console.WriteLine("Entered Post()");
              Console.WriteLine("Order for: "+order.fname);
+             Console.WriteLine("Order id passed to POST: "+order.id);
              
              if(order == null)
              {
@@ -76,7 +86,7 @@ namespace BuckIBooze.API.Controllers
              this.db.Orders.Add(order);
              this.db.SaveChanges();
  
-             return CreatedAtRoute("GetOrder", new {id = order.id}, order);
+             return CreatedAtRoute("GetById", new {id = order.id}, order);
          }
         
         [HttpPut("{id}")]
